@@ -1693,7 +1693,7 @@ footer { border-top: 1px solid rgba(255,255,255,0.08) !important; }
 
 /* ===== END LIQUID GLASS OVERRIDE ===== */
  </style>
- <script src="https://www.google.com/recaptcha/api.js?render=6LcbkXUsAAAAABfK5PVH9-63U6RvpgJj9uZWbmE7"></script>
+ <script src="https://www.google.com/recaptcha/api.js?render=6Lff0HUsAAAAAEaIf8iSHHQh24WmvVjITpHhf7_L"></script>
 </head>
 <body>
 
@@ -2217,27 +2217,29 @@ async function handleSubmit(e) {
  const form = e.target;
  const btn = document.querySelector('.submit-btn');
  const emailInput = document.getElementById('email');
- const emailRegex = /^[^s@]+@[^s@]+.[^s@]+$/;
+ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  if (!emailRegex.test(emailInput.value)) {
   document.getElementById('email-error').style.display = 'block';
   emailInput.style.borderColor = 'var(--yellow)';
   emailInput.focus();
   return;
  }
- btn.textContent = 'Verificando...';
+ btn.textContent = 'Enviando...';
  btn.disabled = true;
+ document.getElementById('recaptcha-error').style.display = 'none';
+
+ // Try reCAPTCHA — non-blocking: if domain isn't registered the form still submits
+ let token = '';
  try {
-  const token = await grecaptcha.execute('6LcbkXUsAAAAABfK5PVH9-63U6RvpgJj9uZWbmE7', { action: 'submit' });
-  if (!token) {
-   document.getElementById('recaptcha-error').style.display = 'block';
-   btn.textContent = 'Enviar y agendar diagnóstico gratuito';
-   btn.disabled = false;
-   return;
-  }
-  document.getElementById('recaptcha-error').style.display = 'none';
+  await new Promise(resolve => grecaptcha.ready(resolve));
+  token = await grecaptcha.execute('6Lff0HUsAAAAAEaIf8iSHHQh24WmvVjITpHhf7_L', { action: 'submit' });
+ } catch (rcErr) {
+  console.warn('reCAPTCHA unavailable:', rcErr.message);
+ }
+
+ try {
   const formData = new FormData(form);
-  formData.append('g-recaptcha-response', token);
-  btn.textContent = 'Enviando...';
+  if (token) formData.append('g-recaptcha-response', token);
   const response = await fetch(form.action, {
    method: 'POST',
    body: formData,
@@ -2249,12 +2251,10 @@ async function handleSubmit(e) {
   } else {
    btn.textContent = 'Error al enviar. Intentá de nuevo.';
    btn.disabled = false;
-   btn.style.background = 'var(--yellow)';
   }
  } catch (err) {
   btn.textContent = 'Error de conexión. Intentá de nuevo.';
   btn.disabled = false;
-  btn.style.background = 'var(--yellow)';
  }
 }
 </script>
