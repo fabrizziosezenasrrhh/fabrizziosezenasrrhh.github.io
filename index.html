@@ -61,7 +61,7 @@
    }
  }
  </script>
- <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+ <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
  <style>
  :root {
  --yellow: #C0392B;
@@ -1309,6 +1309,389 @@
  .why-visual { grid-template-columns: 1fr; }
  .metric-card.featured { grid-column: span 1; }
  }
+
+/* ===================================================
+   LIQUID GLASS + MINIMALISM — REDESIGN LAYER
+   Frosted depth · Soft gradients · Fluid motion
+   =================================================== */
+
+/* --- Typography: Cormorant Garamond (display) + Montserrat (UI) --- */
+
+/* Display serifs — Cormorant Garamond */
+h1, h2, h3, h4,
+.hero-title, .section-title, .cta-title,
+.about-name, .stat-number, .metric-value {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+h1, h2, h3, h4 { letter-spacing: 0.01em; }
+
+/* UI sans — Montserrat */
+.nav-brand-name, .step-title, .reason-title,
+.service-name, .form-title, .success-title,
+.contact-text-value, .card-title, .footer-logo,
+.section-tag, nav, button, .btn-navy, .btn-outline-navy,
+.nav-cta, .submit-btn {
+  font-family: 'Montserrat', 'Inter', sans-serif;
+}
+
+/* Body text */
+body, p, li, input, select, textarea, label {
+  font-family: 'Montserrat', 'Inter', sans-serif;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 5.8vw, 5.4rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+}
+.stat-number {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.section-title {
+  font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.04;
+  margin-bottom: 1.2rem;
+}
+
+/* --- Section tag: clean label, no prefix --- */
+.section-tag {
+  font-size: 0.63rem;
+  letter-spacing: 0.22em;
+  font-weight: 700;
+  gap: 0;
+}
+.section-tag::before { display: none !important; }
+
+/* --- Swiss numbers + service nums: hidden --- */
+.swiss-num { display: none !important; }
+.service-num { display: none !important; }
+
+/* --- Glass nav --- */
+nav {
+  background: rgba(12,28,58,0.88) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+  box-shadow: 0 2px 24px rgba(10,22,50,0.18) !important;
+  will-change: transform;
+  transform: translateZ(0);
+}
+.nav-brand-name { font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.78rem; }
+
+/* --- Hero: photo background --- */
+#hero {
+  background: url('1.jpg') center center / cover no-repeat !important;
+}
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    rgba(8,20,45,0.78) 0%,
+    rgba(12,28,58,0.62) 55%,
+    rgba(8,20,45,0.45) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+#hero > * { position: relative; z-index: 2; }
+
+/* --- Hero badge: frosted pill --- */
+.hero-badge {
+  background: rgba(255,255,255,0.12) !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  border-radius: 100px !important;
+  padding: 0.3rem 1.1rem !important;
+  font-size: 0.67rem;
+  letter-spacing: 0.16em;
+  color: rgba(255,255,255,0.82);
+  margin-bottom: 2rem;
+}
+.hero-badge::before { display: none !important; }
+
+/* --- Hero card: deep glass --- */
+.hero-card.back  { border-radius: 20px !important; opacity: 0.5; }
+.hero-card.main  {
+  border-radius: 20px !important;
+  background: rgba(18,42,82,0.82) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  box-shadow: 0 24px 64px rgba(10,20,50,0.38) !important;
+}
+.floating-badge {
+  border-radius: 100px !important;
+}
+.floating-badge.b1 {
+  background: rgba(255,255,255,0.92) !important;
+  box-shadow: 0 4px 20px rgba(15,34,68,0.12) !important;
+}
+.floating-badge.b2 {
+  background: rgba(15,34,68,0.88) !important;
+  box-shadow: 0 4px 20px rgba(15,34,68,0.22) !important;
+}
+
+/* --- Performance: isolate section repaints --- */
+#sobre-mi, #servicios, #metodologia, #por-que, #contacto {
+  contain: layout paint;
+}
+
+/* --- About: soft gradient mesh --- */
+#sobre-mi {
+  background: linear-gradient(160deg, #f0f5ff 0%, #ffffff 55%, #fff5f4 100%);
+  position: relative; overflow: hidden;
+}
+#sobre-mi::before {
+  content: '';
+  position: absolute; top: -10%; right: -5%;
+  width: 50%; height: 70%;
+  background: radial-gradient(ellipse at center, rgba(192,57,43,0.06) 0%, transparent 68%);
+  pointer-events: none;
+}
+#sobre-mi::after {
+  content: '';
+  position: absolute; bottom: 0; left: -8%;
+  width: 40%; height: 55%;
+  background: radial-gradient(ellipse at center, rgba(24,54,98,0.05) 0%, transparent 68%);
+  pointer-events: none;
+}
+.about-photo-frame { border-radius: 24px !important; }
+.about-name-card {
+  border-radius: 16px !important;
+  background: rgba(10,28,60,0.93) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  border-left: none !important;
+  box-shadow: 0 8px 32px rgba(10,28,60,0.28) !important;
+}
+.about-manifesto {
+  font-family: 'Jost', 'Inter', sans-serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0;
+  border-left: 3px solid var(--yellow);
+  padding-left: 1.3rem;
+  color: var(--navy-dark);
+}
+.chip {
+  border-radius: 100px !important;
+  background: rgba(24,54,98,0.06) !important;
+  border-color: rgba(24,54,98,0.1) !important;
+}
+
+/* --- Services: glass grid on gradient bg --- */
+#servicios {
+  background: linear-gradient(160deg, #ffffff 0%, #f6f9ff 60%, #fff5f4 100%);
+  position: relative; overflow: hidden;
+}
+#servicios::before {
+  content: '';
+  position: absolute; top: 0; right: -8%;
+  width: 45%; height: 65%;
+  background: radial-gradient(ellipse at center, rgba(24,54,98,0.05) 0%, transparent 68%);
+  pointer-events: none;
+}
+.service-card {
+  background: rgba(255,255,255,0.95) !important;
+  border: 1px solid rgba(255,255,255,0.8) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 24px rgba(24,54,98,0.07) !important;
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s cubic-bezier(0.22,1,0.36,1) !important;
+  will-change: transform;
+}
+.service-card::before { display: none !important; }
+.service-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 18px 44px rgba(24,54,98,0.12) !important;
+  border-color: rgba(255,255,255,1) !important;
+}
+.service-card:hover .service-name,
+.service-card:hover .service-desc,
+.service-card:hover .service-items li,
+.service-card:hover .service-items li::before { color: inherit !important; }
+.service-icon {
+  border-radius: 12px !important;
+  background: rgba(192,57,43,0.08) !important;
+  border: none !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+  width: 44px !important; height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.service-name { font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em; }
+
+/* --- Methodology: glass steps on dark --- */
+.step-number {
+  border-radius: 16px !important;
+  width: 70px; height: 70px;
+  background: rgba(255,255,255,0.08) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: -0.03em;
+}
+.step:hover .step-number {
+  background: rgba(192,57,43,0.18) !important;
+  border-color: rgba(192,57,43,0.38) !important;
+  transform: none !important;
+  box-shadow: 0 4px 24px rgba(192,57,43,0.16) !important;
+}
+.step-title { font-weight: 700; font-size: 1rem; }
+
+/* --- Por que: glass metric cards --- */
+#por-que {
+  background: linear-gradient(160deg, #f8faff 0%, #ffffff 50%, #fff5f4 100%);
+  position: relative; overflow: hidden;
+}
+#por-que::before {
+  content: '';
+  position: absolute; top: -5%; left: -5%;
+  width: 40%; height: 55%;
+  background: radial-gradient(ellipse at center, rgba(24,54,98,0.05) 0%, transparent 68%);
+  pointer-events: none;
+}
+.metric-card {
+  background: rgba(255,255,255,0.92) !important;
+  border: 1px solid rgba(255,255,255,0.9) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 20px rgba(192,57,43,0.08) !important;
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s !important;
+  will-change: transform;
+}
+.metric-card.featured {
+  background: rgba(240,245,255,0.95) !important;
+  border: 1px solid rgba(24,54,98,0.1) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 20px rgba(24,54,98,0.08) !important;
+}
+.metric-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 16px 40px rgba(192,57,43,0.13) !important;
+}
+.metric-card.featured:hover {
+  box-shadow: 0 16px 40px rgba(24,54,98,0.14) !important;
+}
+.metric-card:not(.featured) .metric-value { color: var(--yellow) !important; }
+.metric-card:not(.featured) .metric-label { color: var(--navy) !important; opacity: 1 !important; }
+.metric-card.featured .metric-label { color: var(--navy) !important; opacity: 0.75 !important; }
+.metric-value { font-weight: 700; font-size: 2.6rem; letter-spacing: 0.01em; }
+.metric-emoji { display: none; }
+.reason-icon {
+  border-radius: 12px !important;
+  background: rgba(192,57,43,0.08) !important;
+  border: none !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+  width: 40px !important; height: 40px !important;
+  justify-content: center !important;
+}
+.reason-title { font-weight: 700; letter-spacing: -0.01em; }
+
+/* --- CTA --- */
+.cta-title {
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+.cta-eyebrow { letter-spacing: 0.2em; font-size: 0.63rem; }
+
+/* --- Contact: glass form --- */
+#contacto {
+  background: linear-gradient(160deg, #f0f5ff 0%, #ffffff 55%, #fff8f8 100%);
+  position: relative; overflow: hidden;
+}
+#contacto::before {
+  content: '';
+  position: absolute; bottom: -10%; left: -5%;
+  width: 40%; height: 55%;
+  background: radial-gradient(ellipse at center, rgba(192,57,43,0.05) 0%, transparent 68%);
+  pointer-events: none;
+}
+.contact-form {
+  background: rgba(255,255,255,0.88) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255,255,255,0.8) !important;
+  border-radius: 24px !important;
+  border-left: none !important;
+  box-shadow: 0 8px 40px rgba(24,54,98,0.08) !important;
+  padding: 2.5rem !important;
+}
+.form-title { font-weight: 700; letter-spacing: -0.01em; }
+.form-input, .form-select, .form-textarea {
+  border-radius: 10px !important;
+  border: 1px solid rgba(24,54,98,0.12) !important;
+  background: rgba(255,255,255,0.9) !important;
+  padding: 0.85rem 1.1rem !important;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--yellow) !important;
+  background: rgba(255,255,255,0.9) !important;
+  box-shadow: 0 0 0 3px rgba(192,57,43,0.08) !important;
+}
+.contact-icon {
+  border-radius: 10px !important;
+  background: rgba(192,57,43,0.08) !important;
+  border: none !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+  justify-content: center !important;
+}
+
+/* --- Buttons: fluid pill style --- */
+.btn-navy {
+  border-radius: 100px !important;
+  letter-spacing: 0.01em;
+  font-size: 0.9rem; font-weight: 700;
+  text-transform: none !important;
+  padding: 0.9rem 2.1rem;
+  box-shadow: 0 4px 18px rgba(192,57,43,0.28);
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s cubic-bezier(0.22,1,0.36,1) !important;
+}
+.btn-navy:hover {
+  box-shadow: 0 10px 32px rgba(192,57,43,0.38) !important;
+  transform: translateY(-2px) !important;
+}
+.btn-outline-navy {
+  border-radius: 100px !important;
+  letter-spacing: 0.01em;
+  font-size: 0.9rem; font-weight: 600;
+  text-transform: none !important;
+  padding: 0.9rem 2.1rem;
+  background: rgba(255,255,255,0.12) !important;
+}
+.btn-outline-navy:hover { background: rgba(255,255,255,0.15) !important; }
+.nav-cta {
+  border-radius: 100px !important;
+  letter-spacing: 0.01em;
+  font-size: 0.82rem !important;
+  text-transform: none !important;
+  box-shadow: 0 2px 14px rgba(192,57,43,0.32) !important;
+}
+.submit-btn {
+  border-radius: 100px !important;
+  letter-spacing: 0.01em;
+  text-transform: none !important;
+  font-size: 0.93rem; font-weight: 700;
+  box-shadow: 0 4px 16px rgba(192,57,43,0.22);
+}
+.submit-btn:hover { box-shadow: 0 10px 30px rgba(192,57,43,0.32) !important; }
+
+/* --- Footer --- */
+footer { border-top: 1px solid rgba(255,255,255,0.08) !important; }
+.footer-logo { font-weight: 700; letter-spacing: -0.01em; }
+
+/* ===== END LIQUID GLASS OVERRIDE ===== */
  </style>
  <script src="https://www.google.com/recaptcha/api.js?render=6LcbkXUsAAAAABfK5PVH9-63U6RvpgJj9uZWbmE7"></script>
 </head>
@@ -1353,7 +1736,7 @@
  Asesor de empleabilidad · CV formato ATS · LinkedIn estratégico · Preparación de entrevistas · Uruguay y Argentina
  </p>
  <div class="hero-actions">
- <a href="#contacto" class="btn-navy">Quiero mi diagnóstico gratuito →</a>
+ <a href="#contacto" class="btn-navy">Quiero mi diagnóstico gratuito</a>
  <a href="#servicios" class="btn-outline-navy">Ver servicios</a>
  </div>
  <div class="hero-stats">
@@ -1405,6 +1788,7 @@
  </div>
 
  <div class="about-content reveal">
+ <span class="swiss-num">01</span>
  <div class="section-tag">Sobre mí</div>
  <h2 class="section-title">Las personas no fallan.<br/><span class="navy">Fallan los procesos.</span></h2>
  <blockquote class="about-manifesto">
@@ -1434,6 +1818,7 @@
  <!-- SERVICIOS -->
  <section id="servicios">
  <div class="services-header reveal">
+ <span class="swiss-num">02</span>
  <div class="section-tag">Servicios</div>
  <h2 class="section-title">Todo lo que necesitás<br/><span class="navy">para entrar al mercado</span></h2>
  <p class="section-desc">Cada servicio es diseñado específicamente para vos. Primero hacemos el diagnóstico, después definimos juntos qué necesitás.</p>
@@ -1441,7 +1826,8 @@
 
  <div class="services-grid">
  <div class="service-card reveal">
- <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+ <span class="service-num">01 — CV</span>
+  <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
  <div class="service-name">Optimización de CV con enfoque estratégico</div>
  <div class="service-desc">Convertimos tu CV en un documento que supera filtros ATS y convence a reclutadores humanos.</div>
  <ul class="service-items">
@@ -1455,7 +1841,8 @@
  </div>
 
  <div class="service-card reveal">
- <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></div>
+ <span class="service-num">02 — LinkedIn</span>
+  <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></div>
  <div class="service-name">Optimización de LinkedIn para tu marca personal</div>
  <div class="service-desc">Tu perfil como página de ventas profesional: visible, persuasivo y posicionado para ser encontrado.</div>
  <ul class="service-items">
@@ -1469,7 +1856,8 @@
  </div>
 
  <div class="service-card reveal">
- <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+ <span class="service-num">03 — Entrevistas</span>
+  <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
  <div class="service-name">Preparación integral para entrevistas</div>
  <div class="service-desc">Simulaciones reales, método STAR y trabajo sobre comunicación verbal y no verbal.</div>
  <ul class="service-items">
@@ -1482,7 +1870,8 @@
  </div>
 
  <div class="service-card reveal">
- <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+ <span class="service-num">04 — Reclutamiento</span>
+  <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
  <div class="service-name">Reclutamiento de perfiles técnicos para empresas</div>
  <div class="service-desc">Para empresas que necesitan encontrar talento estratégico con fit cultural real.</div>
  <ul class="service-items">
@@ -1498,6 +1887,7 @@
  <!-- METODOLOGÍA -->
  <section id="metodologia">
  <div class="metodologia-header reveal">
+ <span class="swiss-num">03</span>
  <div class="section-tag">Metodología</div>
  <h2 class="section-title">Así trabajamos:<br/>diagnóstico real, resultados reales</h2>
  <p class="section-desc">No usamos plantillas. Cada estrategia es construida desde el diagnóstico personalizado hacia adelante.</p>
@@ -1531,6 +1921,7 @@
  <section id="por-que">
  <div class="why-grid">
  <div class="why-content reveal">
+ <span class="swiss-num">04</span>
  <div class="section-tag">Por qué elegirnos</div>
  <h2 class="section-title">Talento hay.<br/><span class="navy">Lo que falta es orden.</span></h2>
  <p class="section-desc">El mercado no premia al más capacitado, premia al mejor posicionado. Nosotros hacemos que esa diferencia juegue a tu favor.</p>
@@ -1611,6 +2002,7 @@
  <section id="contacto">
  <div class="contact-grid">
  <div class="contact-info reveal">
+ <span class="swiss-num">05</span>
  <div class="section-tag">Contacto</div>
  <h2 class="section-title">Hablemos<br/><span class="navy">sin vueltas</span></h2>
  <p class="section-desc" style="margin-bottom:2rem;">Completá el formulario y te respondo en menos de 24 horas. Sin presión, sin pitch de ventas, primero escucho.</p>
@@ -1709,7 +2101,7 @@
  </div>
 
  <div id="recaptcha-error" style="display:none;color:var(--yellow);font-size:0.82rem;font-weight:700;margin-bottom:0.8rem;">⚠️ No se pudo verificar. Intentá de nuevo.</div>
- <button type="submit" class="submit-btn">Enviar y agendar diagnóstico gratuito →</button>
+ <button type="submit" class="submit-btn">Enviar y agendar diagnóstico gratuito</button>
  <p class="form-note">Tu información es confidencial y jamás es compartida con terceros.</p>
  </form>
  </div>
@@ -1838,7 +2230,7 @@ async function handleSubmit(e) {
   const token = await grecaptcha.execute('6LcbkXUsAAAAABfK5PVH9-63U6RvpgJj9uZWbmE7', { action: 'submit' });
   if (!token) {
    document.getElementById('recaptcha-error').style.display = 'block';
-   btn.textContent = 'Enviar y agendar diagnóstico gratuito →';
+   btn.textContent = 'Enviar y agendar diagnóstico gratuito';
    btn.disabled = false;
    return;
   }
